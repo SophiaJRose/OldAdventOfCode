@@ -14,10 +14,10 @@ def solution(path: os.Path, part2: Boolean): Unit = {
   var total = 0
   lines.foreach {
     (line) =>
-      if part2 then
-        total += part2Values.get(line).getOrElse(0)
-      else
+      if !part2 then
         total += part1Values.get(line).getOrElse(0)
+      else
+        total += part2Values.get(line).getOrElse(0)
   }
   println(total)
 }

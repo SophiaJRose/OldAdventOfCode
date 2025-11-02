@@ -37,11 +37,7 @@ def solution(path: os.Path, part2: Boolean): Unit = {
       val (amount, source, dest) = line match
         case s"move ${InstrNumber(amount)} from ${InstrNumber(source)} to ${InstrNumber(dest)}" => (amount, source-1, dest-1) // Convert from 1-indexing to 0-indexing
         case _ => (0,0,0)
-      if part2 then {
-        val movedCrates = stacks(source).takeRight(amount)
-        stacks(source) = stacks(source).dropRight(amount)
-        stacks(dest) = stacks(dest).appendedAll(movedCrates)
-      } else {
+      if !part2 then {
         var i = 0
         while (i < amount) {
           val movedCrate = stacks(source).last
@@ -49,6 +45,10 @@ def solution(path: os.Path, part2: Boolean): Unit = {
           stacks(dest) = stacks(dest).appended(movedCrate)
           i += 1
         }
+      } else {
+        val movedCrates = stacks(source).takeRight(amount)
+        stacks(source) = stacks(source).dropRight(amount)
+        stacks(dest) = stacks(dest).appendedAll(movedCrates)
       }
   }
   val tops: Array[Char] = stacks.map(_.last)

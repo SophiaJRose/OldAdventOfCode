@@ -22,8 +22,8 @@ def solution(path: os.Path, part2: Boolean): Unit = {
     }
   }
   elves = cumul :: elves
-  if part2 then
-    println(elves.sortWith((x, y) => x > y).take(3).sum)
-  else
+  if !part2 then
     println(elves.sortWith((x, y) => x > y).head)
+  else
+    println(elves.sortWith((x, y) => x > y).take(3).sum)
 }
